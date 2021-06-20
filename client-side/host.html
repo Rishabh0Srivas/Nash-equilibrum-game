@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/host.css">
+</head>
+
+<body onload="">
+    <h1>Enter your Name</h1>
+    <p id="code">anycode</p>
+    <form action="">
+        <div class="input-container">
+            <label>Name</label>
+            <input type="text" id="name" required="" />
+        </div>
+        <button onclick="addgame(event)">
+            Get!
+        </button>
+    </form>
+</body>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    function addgame(event) {
+        event.preventDefault();
+        var name = document.getElementById("name").value;
+        //posting host name to server for game creation and reciving join code
+        axios.post("http://localhost:3000/game/add", {
+            hostname: name,
+        })
+            .then((data) => {
+                document.querySelector("h1").innerText = "Your code is :";
+                let code = document.querySelector("p");
+                code.innerText = data.data._id
+                code.style.display = "block"
+            })
+            .catch((err) => {
+                //error log
+                console.log(err);
+            });
+    }
+
+</script>
+
+</html>

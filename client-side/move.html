@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Fishes</title>
+    <link rel="stylesheet" href="./css/choose.css">
+    <link rel="stylesheet" href="./css/choose-submit.css">
+</head>
+
+<body>
+    <div id="fish" class='bg'>
+
+        <div id="count" class="clock" onload="showCountdown()"></div>
+        <h3>Pick number of fishes :</h3>
+
+        <form name="myform" class="tabber" onsubmit="" id="selection">
+            <label for="t1">1Fish</label>
+            <input id="t1" value="1" name="food" type="radio" checked onclick="makemove()">
+            <label for="t2">2Fishes</label>
+            <input id="t2" value="2" name="food" type="radio" onclick="makemove()">
+            <div class="blob"></div>
+        </form>
+    </div>
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        var a = { move: 1 }
+        function makemove() {
+            var form = document.getElementsByName("food")
+            if (form[1].checked) a.move = 2
+            else a.move = 1
+        }
+        //timer till player can make move
+        function showCountdown() {
+            var count = 120;
+            var interval = setInterval(function () {
+                document.getElementById('count').innerHTML = count;
+                count--;
+                if (count === 0) {
+                    clearInterval(interval);
+                    document.getElementById('count').innerHTML = 'Time Out';
+                    submitform()
+                }
+            }, 1000);
+        }
+        showCountdown();
+
+        function submitform() {
+            //making a post request to the server while using localy stored variable 
+            axios(
+                {
+                    method: "POST",
+                    url: "http://localhost:3000/game/addmove",
+                    data: {
+                        gameid: localStorage.getItem("game_id"),
+                        playerid: localStorage.getItem("_id"),
+                        move: a.move,
+                    },
+                })
+                .then((data) => {
+                    console.log(data)
+                    //redirecting to next page
+                    location.href = './tabel.html'
+                })
+                .catch((err) => {
+                    //error log
+                    console.log(err);
+                });
+        }
+    </script>
+</body>
+
+</html>

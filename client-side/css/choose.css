@@ -1,0 +1,259 @@
+@import url("https://fonts.googleapis.com/css?family=Concert+One&display=swap");
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.clock {
+  margin: 5em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  color: #17d4fe;
+  font-size: 50px;
+  font-family: Orbitron;
+  letter-spacing: 5px;
+}
+
+.bg {
+  display: flex;
+}
+
+html {
+  background-image: url(../img/bubble-animated-background.svg);
+  font-size: 62.5%;
+  z-index: -11000;
+}
+
+body {
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-family: "Concert One", cursive;
+  font-size: 4.2rem;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+svg {
+  display: none;
+}
+
+.tabber {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: stretch;
+  -ms-flex-pack: stretch;
+  justify-content: stretch;
+}
+
+.tabber label {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 3rem;
+  cursor: pointer;
+  will-change: transform;
+  -webkit-transform: translateZ(0px);
+  transform: translateZ(0px);
+  -webkit-transition: -webkit-transform 125ms ease-in-out,
+    -webkit-filter 125ms ease-in-out;
+  transition: -webkit-transform 125ms ease-in-out,
+    -webkit-filter 125ms ease-in-out;
+  transition: transform 125ms ease-in-out, filter 125ms ease-in-out;
+  transition: transform 125ms ease-in-out, filter 125ms ease-in-out,
+    -webkit-transform 125ms ease-in-out, -webkit-filter 125ms ease-in-out;
+}
+
+.tabber label:hover {
+  -webkit-transform: scale(1.15);
+  transform: scale(1.15);
+}
+
+.tabber input[type="radio"] {
+  display: none;
+}
+
+.tabber input[type="radio"]#t1 ~ .blob {
+  -webkit-transform-origin: right center;
+  transform-origin: right center;
+}
+
+.tabber input[type="radio"]#t2 ~ .blob {
+  -webkit-transform-origin: left center;
+  transform-origin: left center;
+}
+
+.tabber input[type="radio"]#t1:checked ~ .blob {
+  background: cornflowerblue;
+  -webkit-animation-name: stretchyRev;
+  animation-name: stretchyRev;
+}
+
+.tabber input[type="radio"]#t2:checked ~ .blob {
+  background-color: skyblue;
+  -webkit-animation-name: stretchy;
+  animation-name: stretchy;
+}
+
+.tabber .blob {
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  border-radius: 4rem;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-direction: forwards;
+  animation-direction: forwards;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-transition: background 150ms ease, -webkit-transform 150ms ease;
+  transition: background 150ms ease, -webkit-transform 150ms ease;
+  transition: transform 150ms ease, background 150ms ease;
+  transition: transform 150ms ease, background 150ms ease,
+    -webkit-transform 150ms ease;
+  filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1"><defs><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" /><feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" /><feComposite in="SourceGraphic" in2="goo" operator="atop"/></filter></defs></svg>#goo');
+}
+
+.tabber .blob:before,
+.tabber .blob:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  background-color: inherit;
+  height: 100%;
+  width: 50%;
+  border-radius: 100%;
+  -webkit-transform: scale(1.15);
+  transform: scale(1.15);
+  -webkit-transition: -webkit-transform 150ms ease;
+  transition: -webkit-transform 150ms ease;
+  transition: transform 150ms ease;
+  transition: transform 150ms ease, -webkit-transform 150ms ease;
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+}
+
+.tabber .blob:before {
+  left: 0;
+  -webkit-animation-delay: 0.15s;
+  animation-delay: 0.15s;
+}
+
+.tabber .blob:after {
+  right: 0;
+}
+
+@-webkit-keyframes stretchy {
+  0% {
+    -webkit-transform: translateX(0) scaleX(1);
+    transform: translateX(0) scaleX(1);
+  }
+  50% {
+    -webkit-transform: translateX(0) scaleX(2);
+    transform: translateX(0) scaleX(2);
+  }
+  100% {
+    -webkit-transform: translateX(100%) scaleX(1);
+    transform: translateX(100%) scaleX(1);
+  }
+}
+
+@keyframes stretchy {
+  0% {
+    -webkit-transform: translateX(0) scaleX(1);
+    transform: translateX(0) scaleX(1);
+  }
+  50% {
+    -webkit-transform: translateX(0) scaleX(2);
+    transform: translateX(0) scaleX(2);
+  }
+  100% {
+    -webkit-transform: translateX(100%) scaleX(1);
+    transform: translateX(100%) scaleX(1);
+  }
+}
+
+@-webkit-keyframes stretchyRev {
+  0% {
+    -webkit-transform: translateX(100%) scaleX(1);
+    transform: translateX(100%) scaleX(1);
+  }
+  50% {
+    -webkit-transform: translateX(0) scaleX(2);
+    transform: translateX(0) scaleX(2);
+  }
+  100% {
+    -webkit-transform: translateX(0) scaleX(1);
+    transform: translateX(0) scaleX(1);
+  }
+}
+
+@keyframes stretchyRev {
+  0% {
+    -webkit-transform: translateX(100%) scaleX(1);
+    transform: translateX(100%) scaleX(1);
+  }
+  50% {
+    -webkit-transform: translateX(0) scaleX(2);
+    transform: translateX(0) scaleX(2);
+  }
+  100% {
+    -webkit-transform: translateX(0) scaleX(1);
+    transform: translateX(0) scaleX(1);
+  }
+}
+
+@-webkit-keyframes pulse {
+  0%,
+  50% {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+  25%,
+  75% {
+    -webkit-transform: scaleX(1.5);
+    transform: scaleX(1.5);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  50% {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+  25%,
+  75% {
+    -webkit-transform: scaleX(1.5);
+    transform: scaleX(1.5);
+  }
+}

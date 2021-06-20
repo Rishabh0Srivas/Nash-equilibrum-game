@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fishing</title>
+    <link rel="stylesheet" href="./css/discuss.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="inner">
+        <img src="./img/Fishing-Hub.png" alt="">
+        <!-- calling showcountdown() function on page load -->
+        <p>Disscussion Break :)</p onload="showCountdown()">
+        <img src="./img/loading.svg" alt="">
+    </div>
+
+</body>
+<script>
+    function showCountdown() {
+        var count = 240;
+        var interval = setInterval(function () {
+            document.getElementById('count').innerHTML = count;
+            count--;
+            if (count === 0) {
+                clearInterval(interval);
+                document.getElementById('count').innerHTML = 'Time Out';
+                //rediretcing to next page on time out
+                location.href = './move.html'
+            }
+        }, 1000);
+    }
+</script>
+
+</html>

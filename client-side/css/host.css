@@ -1,0 +1,77 @@
+body {
+  background-image: url(../img/bubble-animated-background.svg);
+  background-repeat: no-repeat;
+  margin: 0%;
+  padding: 0%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 5em;
+  font-family: "Lobster Two", cursive;
+  color: #999;
+}
+
+p {
+  display: none;
+  font-size: 2em;
+  width: 20em;
+  height: auto;
+  text-align: center;
+}
+
+.input-container label {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  font-size: 16px;
+  color: #fff;
+  /* pointer-event: none; */
+  transition: all 0.5s ease-in-out;
+}
+
+.input-container input {
+  border: 0;
+  border-bottom: 1px solid #555;
+  background: transparent;
+  width: 100%;
+  padding: 8px 0 5px 0;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+.input-container input:focus {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #e74c3c;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  margin-top: 0.2em;
+  padding: 0.2rem 1rem 0.2rem 1rem;
+  border-radius: 0.5em;
+  font-size: 2.2rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+body button:hover {
+  cursor: pointer;
+  background-color: #d3a871;
+}

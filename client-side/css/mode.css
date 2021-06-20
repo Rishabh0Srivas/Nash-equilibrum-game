@@ -1,0 +1,38 @@
+body {
+  background-image: url(../img/bubble-animated-background.svg);
+  background-repeat: no-repeat;
+  margin: 0%;
+  padding: 0%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+button {
+  margin: 2em;
+  padding: 0.4rem 1.5rem 0.4rem 1.5rem;
+  border-radius: 0.5em;
+  font-size: 2.2rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+body button:hover {
+  cursor: pointer;
+  background-color: #d3a871;
+}

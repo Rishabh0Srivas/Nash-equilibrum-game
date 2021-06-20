@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter your details</title>
+    <link rel="stylesheet" href="./css/enter.css">
+    <link rel="stylesheet" href="./css/enter-submit.css">
+    <!-- <link rel="stylesheet" href="./css/enter-btn.css"> -->
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="box" class="box">
+        <form id="myform">
+            <span class="text-center">Enter Your Details</span>
+            <div class="input-container">
+                <input type="text" id="nickname" required="" />
+                <label>Nickname</label>
+            </div>
+            <div class="input-container">
+                <input type="mail" id="code" required="" />
+                <label>Code</label>
+            </div>
+            <button>
+                Submit
+            </button>
+    </div>
+
+    <div id="loading">
+        <h3 id="temp">Waiting for others to join</h3>
+        <div>
+            <img src="./img/loading.svg" alt="">
+        </div>
+    </div>
+</body>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    //selcting form by its id
+    var form = document.getElementById('myform');
+    // adding event listner to the form which is listing for submit event
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        var username = document.getElementById('nickname').value;
+        console.log(username);
+        var code = document.getElementById('code').value;
+        console.log(code);
+        //posting username and join code to the server
+        axios(
+            {
+                method: "POST",
+                url: "http://localhost:3000/game/join",
+                data: {
+                    gameid: code,
+                    playername: username,
+                },
+            })
+            .then((data) => {
+                if (data.status == 200) {
+                    a = data
+                    console.log(a)
+                    localStorage.setItem("game_id", code);
+                    localStorage.setItem("_id", data.data.players[a.data.players["length"] - 1]._id);
+                    document.getElementById('box').style.display = "none"
+                    document.getElementById('loading').style.display = "flex"
+                    var interval = setInterval(function () {
+                        var length = 0;
+                        //checking if all players have joined 
+                        axios.get("http://localhost:3000/game/getgame", {
+                            params: { gameid: localStorage.getItem("game_id") }
+                        })
+                            .then((data) => {
+                                length = data.data.players["length"]
+                                console.log(length);
+                                if (length === 4) {
+                                    clearInterval(interval);
+                                    document.getElementById('temp').innerHTML = 'Joined successfully';
+                                    //redirection to next page that is fish selection page
+                                    location.href = './move.html';
+                                }
+                            })
+                            .catch((err) => {
+                                //error log
+                                console.log(err);
+                            });
+
+                    }, 3000);
+                }
+            })
+            .catch((err) => {
+                //error log
+                console.log(err);
+            });
+    })
+</script>
+
+</html>
