@@ -10,6 +10,17 @@ h1 {
   text-align: center;
   margin-bottom: 15px;
 }
+.clock {
+  margin: 5em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  color: #17d4fe;
+  font-size: 50px;
+  font-family: Orbitron;
+  letter-spacing: 5px;
+}
 .tbl-header {
   background-color: rgba(255, 255, 255, 0.3);
 }

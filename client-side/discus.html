@@ -15,14 +15,15 @@
     <div id="inner">
         <img src="./img/Fishing-Hub.png" alt="">
         <!-- calling showcountdown() function on page load -->
-        <p>Disscussion Break :)</p onload="showCountdown()">
+        <p>Disscussion Break :)</p>
+        <div id="count" class="clock" onload="showCountdown()"></div>
         <img src="./img/loading.svg" alt="">
     </div>
 
 </body>
 <script>
     function showCountdown() {
-        var count = 240;
+        var count = 5;
         var interval = setInterval(function () {
             document.getElementById('count').innerHTML = count;
             count--;
@@ -34,6 +35,7 @@
             }
         }, 1000);
     }
+    showCountdown()
 </script>
 
 </html>

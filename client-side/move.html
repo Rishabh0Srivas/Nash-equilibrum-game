@@ -29,7 +29,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script>
-        var a = { move: 1 }
+        var a = { move: 1 }, snapshot;
         function makemove() {
             var form = document.getElementsByName("food")
             if (form[1].checked) a.move = 2
@@ -37,7 +37,7 @@
         }
         //timer till player can make move
         function showCountdown() {
-            var count = 120;
+            var count = 5;
             var interval = setInterval(function () {
                 document.getElementById('count').innerHTML = count;
                 count--;
@@ -49,6 +49,18 @@
             }, 1000);
         }
         showCountdown();
+
+        function checkround() {
+            for (const players of snapshot.data.players) {
+                if (players.round[players.round.slice(-1)] == null) {
+                    setInterval(() => {
+                        submitform()
+                    }, 3000)
+
+                }
+            }
+            location.href = './tabel.html'
+        }
 
         function submitform() {
             //making a post request to the server while using localy stored variable 
@@ -63,15 +75,15 @@
                     },
                 })
                 .then((data) => {
-                    console.log(data)
-                    //redirecting to next page
-                    location.href = './tabel.html'
+                    snapshot = data
+                    checkround()
                 })
                 .catch((err) => {
                     //error log
                     console.log(err);
                 });
         }
+
     </script>
 </body>
 
